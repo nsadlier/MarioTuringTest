@@ -19,6 +19,9 @@ public class Agent implements MarioAgent {
     @Override
     public boolean[] getActions(MarioForwardModel model, MarioTimer timer) {
     	action[MarioActions.RIGHT.getValue()] = true;
+    	action[MarioActions.SPEED.getValue()] = true;
+    	action[MarioActions.JUMP.getValue()] = model.mayMarioJump() || !model.isMarioOnGround();
+    	
         return action;
     }
 
