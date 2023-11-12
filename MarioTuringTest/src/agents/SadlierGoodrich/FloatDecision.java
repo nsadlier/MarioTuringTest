@@ -6,30 +6,35 @@ import engine.helper.GameStatus;
 import engine.helper.MarioActions;
 
 public class FloatDecision extends Decision {
-	private boolean[] action;
-	//blah
+	float minValue;
+	float maxValue;
+	float testValue;
+	DecisionTree trueNode;
+	DecisionTree falseNode;
 	
-
-
-	public boolean[] jump(MarioForwardModel model, MarioTimer timer) {
-		action[MarioActions.RIGHT.getValue()] = true;
-		action[MarioActions.SPEED.getValue()] = true;
-		action[MarioActions.JUMP.getValue()] = model.mayMarioJump() || !model.isMarioOnGround();
-	
-		return action;
+	public void createFloatDecision (float max, float min) {
+		this.maxValue = max;
+		this.minValue = min;
 	}
 	
-	public boolean[] run(MarioForwardModel model, MarioTimer timer) {
-		action[MarioActions.RIGHT.getValue()] = true;
-		action[MarioActions.SPEED.getValue()] = true;
-		
-		return action;
+	public void setTrueNode(DecisionTree trueNode) {
+		this.trueNode = trueNode;
 	}
 	
-	public boolean[] walk(MarioForwardModel model, MarioTimer timer) {
-		action[MarioActions.RIGHT.getValue()] = true;
-		action[MarioActions.SPEED.getValue()] = false;
-		
-		return action;
+	public void setFalseNode(DecisionTree falseNode) {
+		this.falseNode = falseNode;
+	}
+	
+	public void setTestValue(float testValue) {
+		this.testValue = testValue;
+	}
+	
+	public DecisionTree getBranch() {
+		if (this.maxValue >= this.testValue >= this.minValue) {
+			return trueNode;
+		}
+		else {
+			return falseNode;
+		}
 	}
 }

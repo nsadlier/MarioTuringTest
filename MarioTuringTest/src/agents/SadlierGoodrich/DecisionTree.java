@@ -11,7 +11,7 @@ public class DecisionTree {
 	
 
 
-	public boolean[] jump(MarioForwardModel model, MarioTimer timer) {
+	/*public boolean[] jump(MarioForwardModel model, MarioTimer timer) {
 		action[MarioActions.RIGHT.getValue()] = true;
 		action[MarioActions.SPEED.getValue()] = true;
 		action[MarioActions.JUMP.getValue()] = model.mayMarioJump() || !model.isMarioOnGround();
@@ -31,5 +31,5 @@ public class DecisionTree {
 		action[MarioActions.SPEED.getValue()] = false;
 		
 		return action;
-	}
+	}*/
 }
