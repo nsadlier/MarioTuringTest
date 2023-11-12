@@ -37,4 +37,7 @@ public class FloatDecision extends Decision {
 			return falseNode;
 		}
 	}
+	
+	public DecisionTree makeDecision()
+		return this.getBranch();
 }
