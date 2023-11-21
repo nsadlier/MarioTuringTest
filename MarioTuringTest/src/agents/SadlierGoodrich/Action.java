@@ -12,6 +12,7 @@ public class Action {
 		this.action = new boolean[MarioActions.numberOfActions()];
 	}
 
+	//sets mario to jump while running
 	public boolean[] jump(MarioForwardModel model, MarioTimer timer) {
 		action[MarioActions.RIGHT.getValue()] = true;
 		action[MarioActions.SPEED.getValue()] = true;
@@ -20,6 +21,7 @@ public class Action {
 		return action;
 	}
 	
+	//sets mario to jump while walking
 	public boolean[] jumpSlow(MarioForwardModel model, MarioTimer timer) {
 		action[MarioActions.RIGHT.getValue()] = true;
 		action[MarioActions.SPEED.getValue()] = false;
@@ -28,6 +30,7 @@ public class Action {
 		return action;
 	}
 	
+	//sets mario to run
 	public boolean[] run(MarioForwardModel model, MarioTimer timer) {
 		action[MarioActions.RIGHT.getValue()] = true;
 		action[MarioActions.SPEED.getValue()] = true;
@@ -35,6 +38,7 @@ public class Action {
 		return action;
 	}
 	
+	//sets mario to walk
 	public boolean[] walk(MarioForwardModel model, MarioTimer timer) {
 		action[MarioActions.RIGHT.getValue()] = true;
 		action[MarioActions.SPEED.getValue()] = false;
@@ -42,6 +46,7 @@ public class Action {
 		return action;
 	}
 	
+	//sets mario to stop
 	public boolean[] stop(MarioForwardModel model, MarioTimer timer) {
 		
 		return action;

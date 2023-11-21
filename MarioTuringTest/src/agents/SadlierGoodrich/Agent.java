@@ -23,42 +23,41 @@ public class Agent implements MarioAgent {
 
     @Override
     public boolean[] getActions(MarioForwardModel model, MarioTimer timer) {
-    	int[][] objects = model.getMarioSceneObservation();
-    	int[][] enemies = model.getMarioEnemiesObservation();
-    	float[] obs = new float[11];
-//    	for (int i = 0; i < objects.length; i++) {
-//    		for (int j = 0; j < objects.length; j++) {
-//        		System.out.print(objects[i][j]);
-//        	}
-//    		System.out.println();
-//    	}
-//    	System.out.println();
+    	int[][] objects = model.getMarioSceneObservation(); //gets all objects around mario
+    	int[][] enemies = model.getMarioEnemiesObservation(); // gets all enemies around mario
+    	float[] obs = new float[11]; //stores float values for each node in the decision tree
+    	
+    	//node 0 of tree: check for enemy ahead
     	if (enemies[11][8] != 0 || enemies[10][8] != 0 || enemies[9][8] != 0 || enemies[8][8] != 0) {
     		obs[0] = 1;
     	} else {
     		obs[0] = -1;
     	}
     	
+    	//node 1 of tree: check for wall ahead
     	if (objects[13][8] != 0 || objects[12][8] != 0 || objects[11][8] != 0 || objects[10][8] != 0 || objects[9][8] != 0 || objects[8][8] != 0) {
     		obs[1] = 1;
     	} else {
     		obs[1] = -1;
     	}
     	
+    	//node 3 of tree: check for gap ahead
     	if (objects[14][9] == 0 || objects[13][9] == 0 || objects[12][9] == 0) {
     		obs[3] = 1;
     	} else {
     		obs[3] = -1;
     	}
     	
+    	//node 0 of tree: check if gap is close
     	if (objects[11][9] == 0 || objects[10][9] == 0 || objects[9][9] == 0 || objects[8][9] == 0) {
     		obs[4] = 1;
     	} else {
     		obs[4] = -1;
     	}
 
-    	int actionNum = this.dTree.decide(obs, model, timer);
+    	int actionNum = this.dTree.decide(obs, model, timer); //input the observations into the tree to return a number corresponding to an action
     	
+    	//sets mario's action depending on the actionNum
     	if (actionNum == 0) {
     		action = actionMaker.stop(model, timer);
     	} else if (actionNum == 1) {
@@ -66,6 +65,7 @@ public class Agent implements MarioAgent {
     	} else if (actionNum == 2) {
     		action = actionMaker.run(model, timer);
     	} else if (actionNum == 3) {
+    		//when jumping, mario will randomly jump while walking or running
     		Random rand = new Random();
     		int randJump = rand.nextInt(2);
     		if (randJump == 0) {
